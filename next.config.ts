@@ -3,8 +3,8 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     /* config options here */
     basePath: "/readme_genius",
-    assetPrefix: '/readme_genius',
     output: 'export',
+    trailingSlash: true,
     typescript: {
         ignoreBuildErrors: true,
     },
