@@ -1,4 +1,5 @@
 name: publish-to-github-pages
+
 on:
   push:
     branches:
@@ -21,10 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js - Cache dependencies - Install dependencies
-        uses: ./.github/workflows/setup-node
+      - name: Setup Node.js, cache & install dependencies
+        uses: ./.github/workflows/setup-node # ✅ ensure this step installs deps correctly
 
-      - name: Setup Pages 
+      - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
@@ -32,6 +33,10 @@ jobs:
       - name: Build and Export Next.js
         run: |
           npm run build
+          echo "Listing files after build:"
+          ls -la
+          echo "Listing ./out folder contents:"
+          ls -la ./out || echo "⚠️ 'out' folder not found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
